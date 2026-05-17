@@ -1,0 +1,39 @@
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { BlogList } from "./_components/blog-list";
+import { prisma } from "@/lib/db";
+import { PawPrint } from "lucide-react";
+
+export const dynamic = "force-dynamic";
+
+export const metadata = {
+  title: "Blog | Turma do Tobias",
+  description: "Novidades, dicas e histórias da Turma do Tobias.",
+};
+
+export default async function BlogPage() {
+  let posts: any[] = [];
+  try {
+    posts = await prisma.blogPost.findMany({
+      where: { published: true },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch {}
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <SiteHeader />
+      <main className="flex-1">
+        <section className="bg-gradient-to-br from-pink-50 via-white to-orange-50 py-16">
+          <div className="max-w-[1200px] mx-auto px-4 text-center">
+            <PawPrint className="w-8 h-8 text-[#E5A4CB] mx-auto mb-3" />
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-[#5C3D2E] tracking-tight">Blog</h1>
+            <p className="text-[#5C3D2E]/60 mt-4 text-lg">Novidades, dicas e histórias da Turma do Tobias.</p>
+          </div>
+        </section>
+        <BlogList posts={JSON.parse(JSON.stringify(posts ?? []))} />
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
