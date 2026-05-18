@@ -5,12 +5,12 @@ const prisma = new PrismaClient();
 
 async function main() {
   // Seed admin user
-  const hashedPassword = await bcrypt.hash("johndoe123", 10);
+  const hashedPassword = await bcrypt.hash("turma2024!", 10);
   await prisma.user.upsert({
-    where: { email: "john@doe.com" },
-    update: {},
+    where: { email: "admin@turmadotobias.com" },
+    update: { password: hashedPassword },
     create: {
-      email: "john@doe.com",
+      email: "admin@turmadotobias.com",
       name: "Admin",
       password: hashedPassword,
       role: "admin",

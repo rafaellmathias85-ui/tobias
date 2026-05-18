@@ -17,15 +17,16 @@ export function AdminLoginForm() {
       const result = await signIn("credentials", {
         email,
         password,
-        redirect: true,
-        callbackUrl: "/admin",
+        redirect: false,
       });
       if (result?.error) {
-        toast.error("Credenciais inválidas");
+        toast.error("E-mail ou senha inválidos");
+        setLoading(false);
+      } else if (result?.ok) {
+        window.location.href = "/admin";
       }
     } catch {
       toast.error("Erro ao fazer login");
-    } finally {
       setLoading(false);
     }
   };
