@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { Lock, Mail, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -59,6 +60,14 @@ export function AdminLoginForm() {
           {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
           {loading ? "Entrando..." : "Entrar"}
         </button>
+        <div className="text-center pt-2">
+          <Link
+            href="/admin/forgot-password"
+            className="text-sm text-[#5C3D2E]/50 hover:text-[#E5A4CB] transition-colors"
+          >
+            Esqueceu sua senha?
+          </Link>
+        </div>
       </form>
     </div>
   );
