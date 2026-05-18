@@ -24,7 +24,7 @@ export function AdminDashboard() {
         <div className="max-w-[1200px] mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="relative w-10 h-10">
-              <Image src="/images/logo.png" alt="Logo" fill className="object-contain rounded-full" />
+              <Image src="/images/logo.png" alt="Logo" fill className="object-contain" />
             </div>
             <div>
               <h1 className="font-display font-bold text-[#5C3D2E] flex items-center gap-2">

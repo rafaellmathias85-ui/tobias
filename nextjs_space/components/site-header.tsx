@@ -22,7 +22,7 @@ export function SiteHeader() {
       <div className="max-w-[1200px] mx-auto flex items-center justify-between px-4 py-2">
         <Link href="/" className="flex items-center gap-2">
           <div className="relative w-14 h-14">
-            <Image src="/images/logo.png" alt="Logo Turma do Tobias" fill className="object-contain rounded-full" />
+            <Image src="/images/logo.png" alt="Logo Turma do Tobias" fill className="object-contain" />
           </div>
           <div className="hidden sm:block">
             <span className="font-display font-bold text-[#5C3D2E] text-lg leading-tight block">Turma do Tobias</span>

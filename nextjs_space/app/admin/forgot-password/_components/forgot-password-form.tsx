@@ -39,8 +39,8 @@ export function ForgotPasswordForm() {
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
       <div className="text-center mb-6">
-        <div className="relative w-20 h-20 mx-auto mb-4">
-          <Image src="/images/logo.png" alt="Logo" fill className="object-contain rounded-full" />
+        <div className="relative w-32 h-32 mx-auto mb-4">
+          <Image src="/images/logo.png" alt="Logo Turma do Tobias" fill className="object-contain" />
         </div>
         <h1 className="font-display font-bold text-[#5C3D2E] text-2xl">Recuperar Senha</h1>
         <p className="text-[#5C3D2E]/60 text-sm mt-1">Enviaremos um link para redefinir sua senha</p>
