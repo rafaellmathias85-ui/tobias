@@ -12,16 +12,27 @@ const jakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-di
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' })
 
 export const metadata: Metadata = {
-  title: 'Turma do Tobias | Pet Sitter e Pousadinha',
-  description: 'Hotelzinho familiar para cães e gatos com atendimento humanizado, muito amor e carinho. Desde 2016.',
+  title: {
+    default: 'Turma do Tobias | Hotel para Cães e Gatos em SP - Pet Sitter e Pousadinha',
+    template: '%s | Turma do Tobias Pet Sitter e Pousadinha',
+  },
+  description: 'Hotel e hospedagem para cães e gatos em São Paulo com atendimento humanizado e monitoramento 24h. Pet sitter a domicílio, ambiente familiar seguro. Desde 2016. Ligue (11) 98834-1796.',
+  keywords: ['hotel para cachorro', 'hospedagem pet', 'hotel para gatos', 'pet sitter São Paulo', 'hotelzinho para cães', 'pousada para pets', 'creche para cachorro', 'pet hotel SP', 'cuidador de animais', 'Turma do Tobias'],
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
   },
   openGraph: {
-    title: 'Turma do Tobias | Pet Sitter e Pousadinha',
-    description: 'Hotelzinho familiar para cães e gatos com atendimento humanizado.',
+    title: 'Turma do Tobias | Hotel para Cães e Gatos - Atendimento Humanizado',
+    description: 'Hospedagem familiar para cães e gatos com monitoramento 24h, muito amor e carinho. Desde 2016 em São Paulo.',
+    type: 'website',
+    locale: 'pt_BR',
     images: ['/og-image.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Turma do Tobias | Hotel para Cães e Gatos',
+    description: 'Hospedagem familiar para pets com atendimento humanizado e monitoramento 24h.',
   },
 }
 

@@ -7,8 +7,8 @@ import { Heart, Shield, Clock } from "lucide-react";
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-white to-orange-50">
-      <div className="max-w-[1200px] mx-auto px-4 py-16 md:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-[1200px] mx-auto px-4 py-12 md:py-24">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -17,13 +17,13 @@ export function HeroSection() {
             <span className="inline-flex items-center gap-1.5 bg-[#E5A4CB]/20 text-[#c67aa8] px-3 py-1 rounded-full text-sm font-medium mb-4">
               <Heart className="w-3.5 h-3.5 fill-current" /> Desde 2016
             </span>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-[#5C3D2E] tracking-tight leading-tight">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#5C3D2E] tracking-tight leading-tight">
               Seu pet merece ser <span className="text-[#E5A4CB]">amado</span> como família
             </h1>
-            <p className="mt-4 text-lg text-[#5C3D2E]/70 max-w-lg leading-relaxed">
+            <p className="mt-4 text-base sm:text-lg text-[#5C3D2E]/70 max-w-lg leading-relaxed">
               A Turma do Tobias é um hotelzinho familiar para cães e gatos com atendimento humanizado, acompanhamento 24h e muito carinho.
             </p>
-            <div className="flex flex-wrap gap-3 mt-8">
+            <div className="flex flex-wrap gap-3 mt-6 sm:mt-8">
               <Link
                 href="/contato"
                 className="bg-[#E5A4CB] hover:bg-[#d48dba] text-white font-semibold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all"
@@ -37,7 +37,7 @@ export function HeroSection() {
                 Nossos Serviços
               </Link>
             </div>
-            <div className="flex flex-wrap gap-6 mt-8">
+            <div className="flex flex-wrap gap-4 sm:gap-6 mt-6 sm:mt-8">
               {[
                 { icon: Heart, text: "Atendimento humanizado" },
                 { icon: Shield, text: "Segurança total" },
@@ -65,7 +65,7 @@ export function HeroSection() {
                 priority
               />
             </div>
-            <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
+            <div className="absolute -bottom-4 left-2 sm:-left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
               <div className="bg-[#E5A4CB]/20 p-2 rounded-full">
                 <Heart className="w-5 h-5 text-[#E5A4CB] fill-[#E5A4CB]" />
               </div>

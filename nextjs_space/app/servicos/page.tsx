@@ -3,8 +3,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { ServicosContent } from "./_components/servicos-content";
 
 export const metadata = {
-  title: "Serviços | Turma do Tobias",
-  description: "Conheça nossos serviços de hospedagem, pet sitter e cuidados para seu pet.",
+  title: "Serviços - Hospedagem Pet e Pet Sitter a Domicílio em SP",
+  description: "Serviços de hospedagem para cães e gatos com monitoramento 24h e pet sitter a domicílio em São Paulo. Atendimento humanizado, fotos diárias, alimentação personalizada. Agende pelo WhatsApp (11) 98834-1796.",
 };
 
 export default function ServicosPage() {

@@ -7,8 +7,8 @@ import { PawPrint } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Blog | Turma do Tobias",
-  description: "Novidades, dicas e histórias da Turma do Tobias.",
+  title: "Blog - Dicas de Cuidados com Cães e Gatos",
+  description: "Artigos e dicas sobre cuidados com pets, hospedagem animal, saúde e bem-estar de cães e gatos. Conteúdo educativo da Turma do Tobias para tutores que amam seus animais.",
 };
 
 export default async function BlogPage() {

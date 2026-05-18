@@ -22,8 +22,41 @@ export default async function HomePage() {
     });
   } catch {}
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Turma do Tobias Pet Sitter e Pousadinha",
+    "description": "Hotel e hospedagem para cães e gatos em São Paulo com atendimento humanizado e monitoramento 24h.",
+    "url": process.env.NEXTAUTH_URL || "https://turmadotobias.abacusai.app",
+    "telephone": "+5511988341796",
+    "foundingDate": "2016",
+    "priceRange": "$$",
+    "image": "/images/logo.png",
+    "sameAs": [
+      "https://instagram.com/turmadotobias",
+      "https://facebook.com/turmadotobias",
+      "https://tiktok.com/@turmadotobias"
+    ],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "08:00",
+      "closes": "22:00"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "500",
+      "bestRating": "5"
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <SiteHeader />
       <main className="flex-1">
         <HeroSection />

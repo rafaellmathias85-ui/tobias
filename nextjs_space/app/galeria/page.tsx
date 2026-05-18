@@ -7,8 +7,8 @@ import { PawPrint } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Galeria | Turma do Tobias",
-  description: "Fotos dos nossos hóspedes na Turma do Tobias.",
+  title: "Galeria de Fotos - Pets Felizes na Hospedagem",
+  description: "Galeria de fotos dos cães e gatos hospedados na Turma do Tobias. Veja nossos hóspedes felizes e bem cuidados em um ambiente familiar e acolhedor.",
 };
 
 export default async function GaleriaPage() {

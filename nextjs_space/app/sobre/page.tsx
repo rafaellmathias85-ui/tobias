@@ -3,8 +3,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { SobreContent } from "./_components/sobre-content";
 
 export const metadata = {
-  title: "Sobre Nós | Turma do Tobias",
-  description: "Conheça a história da Turma do Tobias Pet Sitter e Pousadinha.",
+  title: "Sobre Nós - Nossa História de Amor pelos Animais",
+  description: "Conheça a Turma do Tobias Pet Sitter e Pousadinha. Desde 2016 cuidando de cães e gatos com atendimento humanizado, segurança 24h e muito carinho em São Paulo. Ambiente familiar preparado para o bem-estar do seu pet.",
 };
 
 export default function SobrePage() {

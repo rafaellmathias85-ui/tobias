@@ -3,8 +3,27 @@ import { SiteFooter } from "@/components/site-footer";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import { BlogPostContent } from "./_components/blog-post-content";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  let post: any = null;
+  try {
+    post = await prisma.blogPost.findUnique({ where: { slug: params?.slug ?? "" } });
+  } catch {}
+  if (!post) return { title: "Post não encontrado" };
+  return {
+    title: post.title,
+    description: post.excerpt || (post.content ?? "").substring(0, 160),
+    openGraph: {
+      title: post.title,
+      description: post.excerpt || (post.content ?? "").substring(0, 160),
+      type: "article",
+      ...(post.imageUrl ? { images: [post.imageUrl] } : {}),
+    },
+  };
+}
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   let post: any = null;

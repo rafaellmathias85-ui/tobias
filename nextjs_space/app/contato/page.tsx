@@ -4,8 +4,8 @@ import { ContatoForm } from "./_components/contato-form";
 import { PawPrint, Phone, Instagram, Facebook, MapPin } from "lucide-react";
 
 export const metadata = {
-  title: "Contato e Reservas | Turma do Tobias",
-  description: "Faça sua reserva ou entre em contato com a Turma do Tobias.",
+  title: "Contato e Reservas - Agende a Hospedagem do Seu Pet",
+  description: "Faça sua reserva de hospedagem para cães e gatos na Turma do Tobias. Atendimento pelo WhatsApp (11) 98834-1796. Orçamento online rápido, check-in flexível e acompanhamento 24h.",
 };
 
 export default function ContatoPage() {
