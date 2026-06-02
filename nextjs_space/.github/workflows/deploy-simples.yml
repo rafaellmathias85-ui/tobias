@@ -1,0 +1,67 @@
+name: Deploy Simples - CPanel FTP
+
+# Dispara quando há push na branch main
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. Faz checkout do código
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      # 3. Instala dependências
+      - name: Instalar dependências
+        run: npm ci
+
+      # 4. Build do Next.js
+      - name: Build Next.js
+        run: npm run build
+
+      # 5. Deploy via FTP
+      - name: Deploy para FTP
+        uses: valerio-froidl/ftp-deploy-action@v1
+        with:
+          host: ${{ secrets.FTP_HOST }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          remote-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          local-dir: './'
+          state-name: '.ftp-sync-state.json'
+          exclude: |
+            **/.git*
+            **/node_modules/
+            **/.next/cache/
+            **/.env*
+            **/logs/
+            **/*.md
+            **/src/
+            **/prisma/
+            **/scripts/
+            **/tsconfig.json
+            **/next.config.js
+
+      # 6. Notificar sucesso
+      - name: Sucesso! ✅
+        if: success()
+        run: |
+          echo "Deploy realizado com sucesso para 148.251.86.214"
+          echo "Acesse seu site para verificar!"
+
+      # 7. Notificar erro
+      - name: Erro! ❌
+        if: failure()
+        run: echo "Deploy falhou! Verifique os logs acima."
