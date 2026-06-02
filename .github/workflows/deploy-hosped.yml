@@ -8,26 +8,31 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - name: Preservar .env antes do checkout
         run: |
-          ENV="$GITHUB_WORKSPACE/source/.env"
+          ENV="$GITHUB_WORKSPACE/source/nextjs_space/.env"
           if [ -f "$ENV" ]; then
             cp "$ENV" "$HOME/.tobias-env.bak"
           fi
 
       - uses: actions/checkout@v4
+        with:
+          path: source
 
       - name: Restaurar .env apos checkout
         run: |
           BAK="$HOME/.tobias-env.bak"
-          DEST="$GITHUB_WORKSPACE/source/.env"
+          DEST="$GITHUB_WORKSPACE/source/nextjs_space/.env"
           if [ -f "$BAK" ]; then
             cp "$BAK" "$DEST"
           fi
 
       - name: Deploy
         env:
-          APP_SOURCE: ${{ github.workspace }}/source
-        run: bash "${{ github.workspace }}/deploy.sh"
+          APP_SOURCE: ${{ github.workspace }}/source/nextjs_space
+        run: bash "${{ github.workspace }}/source/nextjs_space/deploy.sh"

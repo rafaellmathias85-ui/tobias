@@ -15,7 +15,7 @@ jobs:
         
       - name: Test - System Info
         run: |
-          echo "✅ Runner is working!"
+          echo "Runner is working!"
           echo "OS: Windows"
           echo "Hostname: $env:COMPUTERNAME"
           echo "Current Path: $pwd"
@@ -28,4 +28,4 @@ jobs:
         run: git --version
         
       - name: Success Message
-        run: echo "✅ Self-hosted runner test PASSED!"
+        run: echo "Self-hosted runner test PASSED!"

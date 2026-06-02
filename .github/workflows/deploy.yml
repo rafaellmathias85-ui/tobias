@@ -20,6 +20,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nextjs_space
     
     steps:
       - name: Checkout code
@@ -29,10 +32,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build Next.js application
         run: npm run build
@@ -47,10 +49,9 @@ jobs:
           cp -r .next deploy/
           cp -r public deploy/
           cp package.json deploy/
-          cp package-lock.json deploy/
           cp next.config.js deploy/
           # Copiar node_modules ou usar node_modules do build
-          npm ci --omit=dev --prefix deploy
+          npm install --omit=dev --prefix deploy
           # Criar arquivo de configuração do servidor
           echo "NODE_ENV=production" > deploy/.env.production
           echo "PORT=3000" >> deploy/.env.production
@@ -61,13 +62,16 @@ jobs:
           remote-url: ${{ secrets.FTP_URL }}
           remote-user: ${{ secrets.FTP_USERNAME }}
           remote-password: ${{ secrets.FTP_PASSWORD }}
-          local-path: './deploy/*'
+          local-path: './nextjs_space/deploy/*'
           args: '--delete'
         continue-on-error: true
 
   deploy-ftp:
     runs-on: ubuntu-latest
     needs: build
+    defaults:
+      run:
+        working-directory: nextjs_space
     
     steps:
       - name: Checkout code
@@ -77,10 +81,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build Next.js application
         run: npm run build
@@ -93,7 +96,7 @@ jobs:
           host: ${{ secrets.FTP_HOST }}
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: './.next/'
+          local-dir: './nextjs_space/.next/'
           remote-dir: ${{ secrets.FTP_REMOTE_DIR }}/.next/
           state-name: '.ftp-deploy-sync-state.json'
 
@@ -103,7 +106,7 @@ jobs:
           host: ${{ secrets.FTP_HOST }}
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: './public/'
+          local-dir: './nextjs_space/public/'
           remote-dir: ${{ secrets.FTP_REMOTE_DIR }}/public/
           state-name: '.ftp-deploy-sync-state-public.json'
 
@@ -113,7 +116,7 @@ jobs:
           host: ${{ secrets.FTP_HOST }}
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: './'
+          local-dir: './nextjs_space/'
           remote-dir: ${{ secrets.FTP_REMOTE_DIR }}/
           state-name: '.ftp-deploy-sync-state-app.json'
           exclude: |
@@ -152,7 +155,7 @@ jobs:
             cd ${{ secrets.FTP_REMOTE_DIR }}
             
             # Reinstalar dependências de produção
-            npm ci --omit=dev
+            npm install --omit=dev
             
             # Reiniciar a aplicação (ajustar conforme seu gerenciador de processo)
             # Opção 1: Se usar PM2

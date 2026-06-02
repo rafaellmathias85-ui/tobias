@@ -10,6 +10,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nextjs_space
     
     steps:
       # 1. Faz checkout do código
@@ -21,11 +24,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
 
       # 3. Instala dependências
       - name: Instalar dependências
-        run: npm ci
+        run: npm install
 
       # 4. Build do Next.js
       - name: Build Next.js
@@ -39,7 +41,7 @@ jobs:
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           remote-dir: ${{ secrets.FTP_REMOTE_DIR }}
-          local-dir: './'
+          local-dir: './nextjs_space/'
           state-name: '.ftp-sync-state.json'
           exclude: |
             **/.git*
