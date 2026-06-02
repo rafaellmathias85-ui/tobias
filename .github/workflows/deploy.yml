@@ -91,33 +91,33 @@ jobs:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
 
       - name: Deploy via FTP with SCP
-        uses: valerio-froidl/ftp-deploy-action@v1
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.FTP_HOST }}
-          user: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: './nextjs_space/.next/'
-          remote-dir: ${{ secrets.FTP_REMOTE_DIR }}/.next/
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}/.next/
           state-name: '.ftp-deploy-sync-state.json'
 
       - name: Deploy public files via FTP
-        uses: valerio-froidl/ftp-deploy-action@v1
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.FTP_HOST }}
-          user: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: './nextjs_space/public/'
-          remote-dir: ${{ secrets.FTP_REMOTE_DIR }}/public/
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}/public/
           state-name: '.ftp-deploy-sync-state-public.json'
 
       - name: Deploy app files via FTP
-        uses: valerio-froidl/ftp-deploy-action@v1
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.FTP_HOST }}
-          user: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: './nextjs_space/'
-          remote-dir: ${{ secrets.FTP_REMOTE_DIR }}/
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}/
           state-name: '.ftp-deploy-sync-state-app.json'
           exclude: |
             **/.git*

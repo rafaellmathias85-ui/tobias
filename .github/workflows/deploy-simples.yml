@@ -35,12 +35,12 @@ jobs:
 
       # 5. Deploy via FTP
       - name: Deploy para FTP
-        uses: valerio-froidl/ftp-deploy-action@v1
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.FTP_HOST }}
-          user: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          remote-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}/
           local-dir: './nextjs_space/'
           state-name: '.ftp-sync-state.json'
           exclude: |
