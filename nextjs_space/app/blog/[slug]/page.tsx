@@ -5,7 +5,19 @@ import { notFound } from "next/navigation";
 import { BlogPostContent } from "./_components/blog-post-content";
 import type { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  try {
+    const posts = await prisma.blogPost.findMany({
+      where: { published: true },
+      select: { slug: true },
+    });
+    return (posts ?? []).map((post: any) => ({ slug: post.slug }));
+  } catch {
+    return [];
+  }
+}
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   let post: any = null;

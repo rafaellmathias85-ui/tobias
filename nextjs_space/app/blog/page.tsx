@@ -4,7 +4,6 @@ import { BlogList } from "./_components/blog-list";
 import { prisma } from "@/lib/db";
 import { PawPrint } from "lucide-react";
 
-export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Blog - Dicas de Cuidados com Cães e Gatos",

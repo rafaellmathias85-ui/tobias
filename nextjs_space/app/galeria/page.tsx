@@ -4,7 +4,6 @@ import { GaleriaContent } from "./_components/galeria-content";
 import { prisma } from "@/lib/db";
 import { PawPrint } from "lucide-react";
 
-export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Galeria de Fotos - Pets Felizes na Hospedagem",

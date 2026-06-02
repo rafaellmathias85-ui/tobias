@@ -1,13 +1,10 @@
 import { MetadataRoute } from 'next';
-import { headers } from 'next/headers';
 import { prisma } from '@/lib/db';
 
-export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const headersList = headers();
-  const host = headersList?.get?.('x-forwarded-host') ?? process.env.NEXTAUTH_URL ?? 'https://turmadotobias.com';
-  const baseUrl = host?.startsWith?.('http') ? host : `https://${host}`;
+  const host = process.env.NEXTAUTH_URL ?? 'https://turmadotobias.com';
+  const baseUrl = host.startsWith('http') ? host : `https://${host}`;
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },

@@ -9,7 +9,6 @@ import { CtaSection } from "./_components/cta-section";
 import { BlogPreview } from "./_components/blog-preview";
 import { prisma } from "@/lib/db";
 
-export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   let recentPosts: any[] = [];
