@@ -34,7 +34,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Build Next.js application
         run: npm run build
@@ -51,7 +51,7 @@ jobs:
           cp package.json deploy/
           cp next.config.js deploy/
           # Copiar node_modules ou usar node_modules do build
-          npm install --omit=dev --prefix deploy
+          npm install --omit=dev --legacy-peer-deps --prefix deploy
           # Criar arquivo de configuração do servidor
           echo "NODE_ENV=production" > deploy/.env.production
           echo "PORT=3000" >> deploy/.env.production
@@ -83,7 +83,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Build Next.js application
         run: npm run build
@@ -155,7 +155,7 @@ jobs:
             cd ${{ secrets.FTP_REMOTE_DIR }}
             
             # Reinstalar dependências de produção
-            npm install --omit=dev
+            npm install --omit=dev --legacy-peer-deps
             
             # Reiniciar a aplicação (ajustar conforme seu gerenciador de processo)
             # Opção 1: Se usar PM2

@@ -36,7 +36,7 @@ echo ""
 # 2. Instalar dependências
 echo "📥 Installing dependencies..."
 cd "$APP_SOURCE"
-npm install --omit=dev
+npm install --omit=dev --legacy-peer-deps
 echo "✅ Dependencies installed"
 echo ""
 
