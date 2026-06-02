@@ -1,0 +1,31 @@
+name: Test Self-Hosted Runner
+
+on:
+  push:
+    branches: [ "test-runner" ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Test - System Info
+        run: |
+          echo "✅ Runner is working!"
+          echo "OS: Windows"
+          echo "Hostname: $env:COMPUTERNAME"
+          echo "Current Path: $pwd"
+          
+      - name: Test - Node.js
+        run: node --version
+        continue-on-error: true
+        
+      - name: Test - Git
+        run: git --version
+        
+      - name: Success Message
+        run: echo "✅ Self-hosted runner test PASSED!"
