@@ -1,0 +1,33 @@
+name: Deploy HOSPED
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Preservar .env antes do checkout
+        run: |
+          ENV="$GITHUB_WORKSPACE/source/.env"
+          if [ -f "$ENV" ]; then
+            cp "$ENV" "$HOME/.tobias-env.bak"
+          fi
+
+      - uses: actions/checkout@v4
+
+      - name: Restaurar .env apos checkout
+        run: |
+          BAK="$HOME/.tobias-env.bak"
+          DEST="$GITHUB_WORKSPACE/source/.env"
+          if [ -f "$BAK" ]; then
+            cp "$BAK" "$DEST"
+          fi
+
+      - name: Deploy
+        env:
+          APP_SOURCE: ${{ github.workspace }}/source
+        run: bash "${{ github.workspace }}/deploy.sh"
