@@ -18,7 +18,7 @@ jobs:
         working-directory: nextjs_space
     env:
       NEXT_OUTPUT_MODE: export
-      NEXTAUTH_URL: https://turmadotobias.com
+      NEXTAUTH_URL: https://turmadotobias.com.br
 
     steps:
       - name: Checkout
