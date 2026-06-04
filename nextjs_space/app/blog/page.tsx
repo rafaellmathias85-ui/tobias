@@ -10,6 +10,15 @@ export const metadata = {
   description: "Artigos e dicas sobre cuidados com pets, hospedagem animal, saúde e bem-estar de cães e gatos. Conteúdo educativo da Turma do Tobias para tutores que amam seus animais.",
 };
 
+const STATIC_POSTS = [
+  { id: "s1", title: "Dicas para preparar seu pet para a primeira hospedagem", slug: "dicas-primeira-hospedagem", excerpt: "Confira nossas dicas para que a primeira hospedagem do seu pet seja tranquila e acolhedora.", imageUrl: "/images/small-dog-happy.jpg", published: true, authorName: "Turma do Tobias", createdAt: "2026-05-10T10:00:00.000Z" },
+  { id: "s2", title: "A importância do acompanhamento 24h na hospedagem pet", slug: "importancia-acompanhamento-24h", excerpt: "Saiba como o monitoramento constante garante a segurança e bem-estar do seu pet durante a hospedagem.", imageUrl: "/images/dog-relaxed-lying.jpg", published: true, authorName: "Turma do Tobias", createdAt: "2026-04-20T10:00:00.000Z" },
+  { id: "s3", title: "Cuidados especiais com gatos na hospedagem", slug: "cuidados-especiais-gatos", excerpt: "Descubra como cuidamos dos felinos com atenção especial na Turma do Tobias.", imageUrl: "/images/cat-relaxing-home.jpg", published: true, authorName: "Turma do Tobias", createdAt: "2026-03-15T10:00:00.000Z" },
+  { id: "s4", title: "Pet Sitter: a opção perfeita para pets que preferem ficar em casa", slug: "pet-sitter-domicilio", excerpt: "Conheça nosso serviço de Pet Sitter a domicílio para pets que preferem o conforto de casa.", imageUrl: "/images/pet-sitter-caring.jpg", published: true, authorName: "Turma do Tobias", createdAt: "2026-02-28T10:00:00.000Z" },
+  { id: "s5", title: "Como escolher o melhor hotel para seu pet", slug: "como-escolher-hotel-pet", excerpt: "Guia prático com dicas essenciais para escolher o hotel ideal para o seu pet.", imageUrl: "/images/group-pets-playing.jpg", published: true, authorName: "Turma do Tobias", createdAt: "2026-02-10T10:00:00.000Z" },
+  { id: "s6", title: "Nossos hóspedes adoram a hora do lanche!", slug: "hospedes-hora-lanche", excerpt: "A alimentação é personalizada para cada hóspede na Turma do Tobias.", imageUrl: "/images/cat-being-groomed.jpg", published: true, authorName: "Turma do Tobias", createdAt: "2026-01-20T10:00:00.000Z" },
+];
+
 export default async function BlogPage() {
   let posts: any[] = [];
   try {
@@ -18,6 +27,7 @@ export default async function BlogPage() {
       orderBy: { createdAt: "desc" },
     });
   } catch {}
+  if (!posts || posts.length === 0) posts = STATIC_POSTS;
 
   return (
     <div className="min-h-screen flex flex-col">

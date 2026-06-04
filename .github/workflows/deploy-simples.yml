@@ -35,11 +35,12 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate
 
-      - name: Disable API routes for static export
+      - name: Disable server-only routes for static export
         run: |
-          mv app/api ../api-disabled-for-static-export
-          mv app/admin ../admin-disabled-for-static-export
-          mv app/blog/[slug] ../blog-slug-disabled-for-static-export
+          [ -d app/api ] && mv app/api ../api-disabled || true
+          [ -d app/admin ] && mv app/admin ../admin-disabled || true
+          [ -d app/adm ] && mv app/adm ../adm-disabled || true
+          [ -d 'app/blog/[slug]' ] && mv 'app/blog/[slug]' ../blog-slug-disabled || true
 
       - name: Build static site
         run: npm run build

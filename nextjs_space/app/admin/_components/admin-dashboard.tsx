@@ -2,11 +2,12 @@
 import { useSession, signOut } from "next-auth/react";
 import { useState } from "react";
 import Image from "next/image";
-import { LogOut, BookOpen, ImageIcon, LayoutDashboard } from "lucide-react";
+import { LogOut, BookOpen, ImageIcon, LayoutDashboard, ClipboardList } from "lucide-react";
 import { BlogManager } from "./blog-manager";
 import { GalleryManager } from "./gallery-manager";
+import { ReservasManager } from "./reservas-manager";
 
-type Tab = "blog" | "galeria";
+type Tab = "blog" | "galeria" | "reservas";
 
 export function AdminDashboard() {
   const { data: session } = useSession() || {};
@@ -15,6 +16,7 @@ export function AdminDashboard() {
   const tabs: { id: Tab; label: string; icon: React.ReactNode }[] = [
     { id: "blog", label: "Blog", icon: <BookOpen className="w-4 h-4" /> },
     { id: "galeria", label: "Galeria", icon: <ImageIcon className="w-4 h-4" /> },
+    { id: "reservas", label: "Reservas", icon: <ClipboardList className="w-4 h-4" /> },
   ];
 
   return (
@@ -69,6 +71,7 @@ export function AdminDashboard() {
       <div className="max-w-[1200px] mx-auto px-4 py-8">
         {activeTab === "blog" && <BlogManager />}
         {activeTab === "galeria" && <GalleryManager />}
+        {activeTab === "reservas" && <ReservasManager />}
       </div>
     </div>
   );

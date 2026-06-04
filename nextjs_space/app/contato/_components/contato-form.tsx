@@ -40,23 +40,43 @@ export function ContatoForm() {
       return;
     }
     setLoading(true);
+
+    const fmt = (d: string) => {
+      const [y, m, day] = (d ?? "").split("-");
+      return day && m && y ? `${day}/${m}/${y}` : d;
+    };
+
+    const lines = [
+      "Olá! Gostaria de fazer uma reserva na Turma do Tobias:",
+      "",
+      "*Dados do Tutor:*",
+      `Nome: ${form.tutorName}`,
+      `E-mail: ${form.tutorEmail}`,
+      `Telefone: ${form.tutorPhone}`,
+      "",
+      "*Dados do Pet:*",
+      `Nome: ${form.petName}`,
+      `Espécie: ${form.petSpecies}`,
+      form.petBreed ? `Raça: ${form.petBreed}` : "",
+      "",
+      "*Período de Hospedagem:*",
+      `Entrada: ${fmt(form.startDate)}`,
+      `Saída: ${fmt(form.endDate)}`,
+      form.message ? `\nObservações: ${form.message}` : "",
+    ].filter(Boolean).join("\n");
+
     try {
-      const res = await fetch("/api/contact", {
+      await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
-      });
-      if (res?.ok) {
-        setSuccess(true);
-        toast.success("Solicitação enviada com sucesso!");
-      } else {
-        toast.error("Erro ao enviar. Tente novamente.");
-      }
-    } catch {
-      toast.error("Erro ao enviar. Tente novamente.");
-    } finally {
-      setLoading(false);
-    }
+      }).catch(() => {});
+    } catch {}
+
+    const waUrl = `https://wa.me/5511988341796?text=${encodeURIComponent(lines)}`;
+    window.open(waUrl, "_blank");
+    setSuccess(true);
+    setLoading(false);
   };
 
   if (success) {
