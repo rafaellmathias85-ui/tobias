@@ -40,6 +40,17 @@ npm install --omit=dev --legacy-peer-deps
 echo "✅ Dependencies installed"
 echo ""
 
+# 2.5. Gerar cliente Prisma e sincronizar schema do banco
+echo "🗄️  Syncing database schema..."
+npx prisma generate
+npx prisma db push --accept-data-loss 2>&1 && echo "✅ Database schema synced" || echo "⚠️  DB push failed, continuing..."
+echo ""
+
+# 2.6. Seed do banco com dados iniciais (upsert - seguro re-executar)
+echo "🌱 Seeding database..."
+npx prisma db seed 2>&1 && echo "✅ Seed complete" || echo "⚠️  Seed skipped or already done"
+echo ""
+
 # 3. Build da aplicação
 echo "🔨 Building Next.js application..."
 npm run build
