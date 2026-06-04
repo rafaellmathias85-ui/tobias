@@ -1,0 +1,75 @@
+name: Deploy via SSH (Servidor Completo)
+
+# Este workflow faz o deploy do servidor Node.js completo via SSH.
+# Necessario para que /admin, /api e funcionalidades do banco funcionem.
+#
+# Adicione os seguintes secrets em:
+# GitHub → Settings → Secrets → Actions → New repository secret
+#
+#   SSH_HOST       → IP do servidor (ex: 148.251.86.214)
+#   SSH_PORT       → Porta SSH (normalmente 22)
+#   SSH_USERNAME   → Usuario SSH/cPanel (ex: turmadob)
+#   SSH_PASSWORD   → Senha SSH/cPanel
+#   APP_DIR        → Caminho da aplicacao no servidor (ex: /home/turmadob/tobias_app)
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy servidor Node.js via SSH
+    runs-on: ubuntu-latest
+    # So roda se os secrets SSH estiverem configurados
+    if: ${{ vars.SSH_ENABLED == 'true' || github.event_name == 'workflow_dispatch' }}
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          timeout: 300s
+          script: |
+            set -e
+            APP_DIR="${{ secrets.APP_DIR || '$HOME/tobias_app' }}"
+
+            # Criar diretorio se nao existir
+            mkdir -p "$APP_DIR"
+            cd "$APP_DIR"
+
+            # Clonar ou atualizar repositorio
+            if [ -d ".git" ]; then
+              git fetch origin
+              git reset --hard origin/main
+            else
+              git clone https://github.com/rafaellmathias85-ui/tobias.git .
+            fi
+
+            # Entrar no diretorio da aplicacao
+            cd nextjs_space
+
+            # Instalar dependencias
+            npm install --omit=dev --legacy-peer-deps
+
+            # Sincronizar schema do banco e seed
+            npx prisma generate
+            npx prisma db push --accept-data-loss || echo "DB push falhou, continuando..."
+            npx prisma db seed || echo "Seed falhou ou ja foi executado"
+
+            # Build
+            npm run build
+
+            # Reiniciar com PM2
+            if command -v pm2 &> /dev/null; then
+              pm2 describe tobias > /dev/null 2>&1 && pm2 restart tobias || pm2 start npm --name tobias -- start
+              pm2 save
+            else
+              echo "PM2 nao encontrado. Instale com: npm install -g pm2"
+              nohup npm start > /tmp/tobias.log 2>&1 &
+            fi
+
+            echo "Deploy concluido com sucesso!"

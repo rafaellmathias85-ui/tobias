@@ -38,8 +38,6 @@ jobs:
       - name: Disable server-only routes for static export
         run: |
           [ -d app/api ] && mv app/api ../api-disabled || true
-          [ -d app/admin ] && mv app/admin ../admin-disabled || true
-          [ -d app/adm ] && mv app/adm ../adm-disabled || true
           [ -d 'app/blog/[slug]' ] && mv 'app/blog/[slug]' ../blog-slug-disabled || true
 
       - name: Build static site
