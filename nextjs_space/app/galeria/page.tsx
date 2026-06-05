@@ -11,10 +11,11 @@ export const metadata = {
 };
 
 export default async function GaleriaPage() {
-  let images: typeof staticImages = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let images: any[] = [];
   try {
     const dbImages = await prisma.galleryImage.findMany({ orderBy: { createdAt: "desc" } });
-    if (dbImages && dbImages.length > 0) images = dbImages as typeof staticImages;
+    if (dbImages && dbImages.length > 0) images = dbImages;
   } catch {}
   if (!images || images.length === 0) images = staticImages;
 

@@ -11,13 +11,14 @@ export const metadata = {
 };
 
 export default async function BlogPage() {
-  let posts: typeof staticPosts = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let posts: any[] = [];
   try {
     const dbPosts = await prisma.blogPost.findMany({
       where: { published: true },
       orderBy: { createdAt: "desc" },
     });
-    if (dbPosts && dbPosts.length > 0) posts = dbPosts as typeof staticPosts;
+    if (dbPosts && dbPosts.length > 0) posts = dbPosts;
   } catch {}
   if (!posts || posts.length === 0) posts = staticPosts;
 
