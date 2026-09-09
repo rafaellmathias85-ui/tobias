@@ -18,3 +18,10 @@ out
 .deploy
 .logs
 *.tsbuildinfo
+
+# secrets - never commit real env files
+.env
+.env.local
+.env.production
+.env.*.local
+!.env.example
